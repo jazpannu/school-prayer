@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_bluetooth"
+        android:icon="@drawable/ic_bluetooth_white"
+        android:title="@string/bt_title"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_add_white"
+        android:title="@string/add_files"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_school"
+        android:title="@string/change_school"
+        app:showAsAction="never" />
+</menu>
