@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,7 +21,17 @@ jobs:
           chmod +x gradlew
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
           ./gradlew assembleDebug --no-daemon --stacktrace
+          cp app/build/outputs/apk/debug/app-debug.apk SchoolPrayer.apk
       - uses: actions/upload-artifact@v4
         with:
           name: SchoolPrayer-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: SchoolPrayer.apk
+      - name: Publish to the "latest" release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest SchoolPrayer.apk \
+            --title "School Prayer (latest build)" \
+            --notes "Built from ${GITHUB_SHA::7}. Download SchoolPrayer.apk on the phone and open it to install."
