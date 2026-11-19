@@ -5,7 +5,7 @@ A simple app for school assembly: keep a list of prayer/anthem audio files, sear
 ## Features
 - **School name:** the first time the app opens it asks for the school name, which is then shown at the top of the home screen. Tap the name (or ⋮ → Change school name) to edit it.
 - **Favourites:** tap the ☆ next to a prayer to make it a favourite; favourites always stay at the top of the list.
-- **Built-in tracks:** Jan Gan Man, Vande Mataram, Mujhe is Duniya me laaya and Subah Savere lete tera naam ship inside the app and appear on first launch.
+- **Built-in tracks:** Jan Gan Man, Vande Mataram, Mujhe is Duniya me laaya, Subah Savere lete tera naam and Sansaar ke mali ne ship inside the app and appear on first launch.
 - **Add prayer files:** tap **+** to pick one or more audio files (MP3, M4A, WAV and similar) from the phone. They stay in the list after the app restarts.
 - **Searchable list:** type in the search box to filter by name.
 - **Player:** tap a prayer to play it; tap it again to pause or resume. The bottom bar has play/pause, stop and a seek bar.
@@ -24,8 +24,8 @@ Requires Android 8.0 or newer.
 **GitHub (no Android Studio needed):** push this folder to a GitHub repo. The workflow in `.github/workflows/build-apk.yml` builds a debug APK on every push; download it from the run's **Artifacts** section.
 
 ## Adding more built-in tracks
-Put the MP3 in `app/src/main/res/raw/` (use lowercase letters, digits and underscores only, e.g. `morning_prayer.mp3`), then add a line to `builtIns()` in `TrackStore.kt`:
+Put the MP3 in `app/src/main/res/raw/` (lowercase letters, digits and underscores only, e.g. `morning_prayer.mp3`), then add a line to `builtIns` in `TrackStore.kt`:
 ```kotlin
-Track(rawUri(R.raw.morning_prayer), "Morning Prayer"),
+"morning_prayer" to "Morning Prayer",
 ```
-Built-ins load on first launch only. To see a new one on a phone that already has the app, clear the app's data or reinstall.
+New built-ins appear on phones that already have the app as soon as it's updated (unless someone removed that prayer from the list).
