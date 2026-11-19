@@ -15,8 +15,23 @@ android {
         versionName = "1.0"
     }
 
+    // One fixed key for every build, so a new APK installs as an update over the old one
+    // (Android refuses updates signed with a different key).
+    signingConfigs {
+        create("school") {
+            storeFile = file("school-prayer.keystore")
+            storePassword = "schoolprayer"
+            keyAlias = "schoolprayer"
+            keyPassword = "schoolprayer"
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("school")
+        }
         release {
+            signingConfig = signingConfigs.getByName("school")
             isMinifyEnabled = false
         }
     }
